@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".MealActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/restaurant_profile"
+            layout="@layout/restaurant_card"/>
+
+        <Button
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:id="@+id/checkIn"
+            android:layout_below="@+id/restaurant_profile"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:text="@string/check_in"/>
+
+        <TextView
+            android:id="@+id/review_break"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkIn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/meal_break"
+            android:textAllCaps="true"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/review_break"
+            android:layout_centerHorizontal="true"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/meal_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/review_break"
+            android:layout_marginTop="10dp"/>
+
+    </RelativeLayout>
+</LinearLayout>
