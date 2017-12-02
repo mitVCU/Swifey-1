@@ -1,4 +1,4 @@
-package com.jzheadley.swifey.adapter;
+package com.jzheadley.swifey.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;

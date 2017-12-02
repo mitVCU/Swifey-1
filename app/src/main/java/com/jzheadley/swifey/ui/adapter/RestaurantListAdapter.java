@@ -1,4 +1,4 @@
-package com.jzheadley.swifey.adapter;
+package com.jzheadley.swifey.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.ui.MealActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mit on 11/20/17.
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    ArrayList<Restaurant> items;
+    List<Restaurant> items;
     public RestaurantListAdapter(Context context, ArrayList<Restaurant> items){
         this.context = context;
         this.items = items;

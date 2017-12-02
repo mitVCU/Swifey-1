@@ -109,8 +109,8 @@ public class NetModule {
 
     @Provides
     @Singleton
-    MirandaApi provideMirandaApi(@Named("DebugRetrofit") Retrofit retrofit) {
-        return retrofit.create(MirandaApi.class);
+    SwifeyApi provideMirandaApi(@Named("DebugRetrofit") Retrofit retrofit) {
+        return retrofit.create(SwifeyApi.class);
     }
 
 

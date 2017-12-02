@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.jzheadley.swifey.Models.Meal;
 import com.jzheadley.swifey.R;
-import com.jzheadley.swifey.adapter.MealListAdapter;
+import com.jzheadley.swifey.ui.adapter.MealListAdapter;
 
 import java.util.ArrayList;
 
