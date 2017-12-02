@@ -10,7 +10,6 @@ import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.base.BaseApplication;
 import com.jzheadley.swifey.network.SwifeyApi;
 import com.jzheadley.swifey.ui.adapter.RestaurantListAdapter;
-import com.jzheadley.swifey.ui.adapter.RestaurantListPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import javax.inject.Inject;
 
 public class RestaurantListActivity extends AppCompatActivity {
     @Inject
-    private SwifeyApi api;
+    SwifeyApi api;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -42,9 +41,9 @@ public class RestaurantListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //////////////////////////////////////////
-        Restaurant res1 = new Restaurant(Math.random(), "test1", "something", "9-5", "");
-        Restaurant res2 = new Restaurant(Math.random(), "test2", "something", "9-5", "");
-        Restaurant res3 = new Restaurant(Math.random(), "test3", "something", "9-5", "");
+        Restaurant res1 = new Restaurant(Math.random(), "Restaurant 1", "This is a description of the restaurant", "9-5", "");
+        Restaurant res2 = new Restaurant(Math.random(), "Restaurant 2", "This is a description of the restaurant", "9-5", "");
+        Restaurant res3 = new Restaurant(Math.random(), "Restaurant 3", "This is a description of the restaurant", "9-5", "");
         restaurants.add(res1);
         restaurants.add(res2);
         restaurants.add(res3);

@@ -1,15 +1,14 @@
 package com.jzheadley.swifey.base;
 
+import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 
 import com.jzheadley.swifey.network.DaggerNetComponent;
 import com.jzheadley.swifey.network.NetComponent;
 import com.jzheadley.swifey.network.NetModule;
 
 
-public class BaseApplication extends MultiDexApplication {
+public class BaseApplication extends Application {
     private AppComponent appComponent;
     private NetComponent netComponent;
 
@@ -19,7 +18,6 @@ public class BaseApplication extends MultiDexApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
-        MultiDex.install(this);
         super.attachBaseContext(base);
     }
 

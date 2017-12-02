@@ -1,8 +1,7 @@
-package com.jzheadley.swifey.ui.adapter;
+package com.jzheadley.swifey.ui;
 
 import com.jzheadley.swifey.Models.Restaurant;
 import com.jzheadley.swifey.network.SwifeyApi;
-import com.jzheadley.swifey.ui.RestaurantListActivity;
 
 import java.util.List;
 

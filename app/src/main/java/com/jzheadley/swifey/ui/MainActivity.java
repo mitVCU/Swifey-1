@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,7 +17,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
-
+    private static final String TAG = "MainActivity";
     private Button temp;
 
     @Override
@@ -32,19 +33,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        determineLoginStatus();
-
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        determineLoginStatus();
+    }
+
     private void determineLoginStatus() {
+        Log.d(TAG, "determineLoginStatus: deteriming login status");
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
-            // already signed in
-        } else {
+        if (auth.getCurrentUser() == null) {
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
+                            .setIsSmartLockEnabled(false, true)
                             .setAvailableProviders(
                                     Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                                             new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build(),
@@ -52,6 +57,5 @@ public class MainActivity extends AppCompatActivity {
                             .build(),
                     RC_SIGN_IN);
         }
-
     }
 }
