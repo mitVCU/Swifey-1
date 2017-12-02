@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jzheadley.swifey.MealActivity;
 import com.jzheadley.swifey.Models.Restaurant;
 import com.jzheadley.swifey.R;
+import com.jzheadley.swifey.ui.MealActivity;
 
 import java.util.ArrayList;
 

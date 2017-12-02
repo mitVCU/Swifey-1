@@ -1,10 +1,12 @@
-package com.jzheadley.swifey;
+package com.jzheadley.swifey.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.jzheadley.swifey.R;
 
 public class MainActivity extends AppCompatActivity {
 
