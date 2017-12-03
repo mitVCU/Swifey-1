@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jzheadley.swifey.Models.Restaurant;
 import com.jzheadley.swifey.R;
+import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.ui.MealActivity;
 
 import java.util.ArrayList;
@@ -24,15 +24,17 @@ import java.util.List;
 public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<Restaurant> items;
-    public RestaurantListAdapter(Context context, ArrayList<Restaurant> items){
+
+    public RestaurantListAdapter(Context context, ArrayList<Restaurant> items) {
         this.context = context;
         this.items = items;
 
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View row = inflater.inflate(R.layout.restaurant_card,parent,false);
+        View row = inflater.inflate(R.layout.restaurant_card, parent, false);
         Item item = new Item(row);
 
         return item;
@@ -40,10 +42,10 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((Item)holder).restaurantName.setText(items.get(position).getRestaurantName());
-        ((Item)holder).restaurantDesc.setText(items.get(position).getRestaurantDesc());
+        ((Item) holder).restaurantName.setText(items.get(position).getRestaurantName());
+        // ((Item) holder).restaurantDesc.setText(items.get(position).getRestaurantDescription());
 
-        ((Item)holder).restaurantCard.setOnClickListener(new View.OnClickListener(){
+        ((Item) holder).restaurantCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
@@ -58,15 +60,16 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return items.size();
     }
 
-    public class Item extends RecyclerView.ViewHolder{
-        ImageView restaurantIMG;
+    public class Item extends RecyclerView.ViewHolder {
+        ImageView restaurantImg;
         TextView restaurantName;
         TextView restaurantDesc;
         CardView restaurantCard;
+
         public Item(View itemView) {
             super(itemView);
-            restaurantIMG = itemView.findViewById(R.id.restaurant_image);
-            restaurantName=itemView.findViewById(R.id.restaurant_name);
+            restaurantImg = itemView.findViewById(R.id.restaurant_image);
+            restaurantName = itemView.findViewById(R.id.restaurant_name);
             restaurantDesc = itemView.findViewById(R.id.restaurant_description);
             restaurantCard = itemView.findViewById(R.id.restaurant_card);
         }

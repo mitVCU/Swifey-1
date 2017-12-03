@@ -8,22 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jzheadley.swifey.Models.Meal;
 import com.jzheadley.swifey.R;
+import com.jzheadley.swifey.models.Meal;
 
-import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by mit on 11/26/17.
- */
-
-public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "meal adapter";
 
-    Context context;
-    ArrayList<Meal> meals;
+    private Context context;
+    private List<Meal> meals;
 
-    public MealListAdapter(Context context, ArrayList<Meal>  meals){
+    public MealListAdapter(Context context, List<Meal> meals) {
         this.context = context;
         this.meals = meals;
     }
@@ -39,9 +35,9 @@ public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((Item)holder).mealName.setText(meals.get(position).getMealName());
-        ((Item)holder).mealDesc.setText(meals.get(position).getMealDesc());
-  //      ((Item)holder).mealCost.setText(meals.get(position).getMealCost());
+        ((Item) holder).mealName.setText(meals.get(position).getMealName());
+        ((Item) holder).mealDesc.setText(meals.get(position).getMealDesc());
+        //      ((Item)holder).mealCost.setText(meals.get(position).getMealCost());
     }
 
     @Override
@@ -49,15 +45,16 @@ public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return meals.size();
     }
 
-    public class Item extends RecyclerView.ViewHolder{
-       // ImageView mealIMG;
+    public class Item extends RecyclerView.ViewHolder {
+        // ImageView mealIMG;
         TextView mealName;
         TextView mealCost;
         TextView mealDesc;
         CardView mealCard;
-        public Item (View itemView){
+
+        public Item(View itemView) {
             super(itemView);
-          //  mealIMG = itemView.findViewById(R.id.meal_image);
+            //  mealIMG = itemView.findViewById(R.id.meal_image);
             mealName = itemView.findViewById(R.id.meal_name);
             mealCost = itemView.findViewById(R.id.meal_cost);
             mealDesc = itemView.findViewById(R.id.meal_desc);

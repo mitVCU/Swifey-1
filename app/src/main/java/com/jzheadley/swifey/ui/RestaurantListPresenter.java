@@ -1,6 +1,6 @@
 package com.jzheadley.swifey.ui;
 
-import com.jzheadley.swifey.Models.Restaurant;
+import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.network.SwifeyApi;
 
 import java.util.List;
