@@ -7,6 +7,8 @@ import com.jzheadley.swifey.network.DaggerNetComponent;
 import com.jzheadley.swifey.network.NetComponent;
 import com.jzheadley.swifey.network.NetModule;
 
+import timber.log.Timber;
+
 
 public class BaseApplication extends Application {
     private AppComponent appComponent;
@@ -24,10 +26,9 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        Timber.plant(new Timber.DebugTree());
         initAppComponent();
         initNetComponent();
-
     }
 
     private void initNetComponent() {

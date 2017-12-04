@@ -3,4 +3,15 @@
     <string name="check_in">Check In</string>
     <string name="meal_break">Meal</string>
     <string name="check_in_btn">Check In</string>
+    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="enter_your_information">Enter your information</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_dob">Date of Birth</string>
+    <string name="hint_phone_number">1234567890</string>
+    <string name="hint_num_swipes">Number of Swipes</string>
+    <string name="submit_btn">Submit</string>
 </resources>
