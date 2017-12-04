@@ -74,6 +74,7 @@
             android:clickable="true"
             android:editable="false"
             android:focusable="true"
+            android:focusableInTouchMode="false"
             android:hint="@string/hint_dob"
             android:id="@+id/dob"
             android:inputType="date"
@@ -101,24 +102,6 @@
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
     </android.support.design.widget.TextInputLayout>
-
-    <!-- <android.support.design.widget.TextInputLayout
-         android:id="@+id/phone_text_input_layout"
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent">
-
-         <android.support.design.widget.TextInputEditText
-             android:hint="@string/hint_phone_number"
-             android:id="@+id/phone_number"
-             android:inputType="phone"
-             android:layout_height="wrap_content"
-             android:layout_marginBottom="10dp"
-             android:layout_width="match_parent"
-             android:maxLength="10"
-             android:maxLines="1"
-             android:textColor="@android:color/black"
-             android:textColorHint="@android:color/black" />
-     </android.support.design.widget.TextInputLayout>-->
 
     <com.lamudi.phonefield.PhoneInputLayout
         android:id="@+id/phone_input_layout"

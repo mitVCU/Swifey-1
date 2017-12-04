@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_user_details.*
 import timber.log.Timber
 import java.sql.Date
 import java.sql.Timestamp
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,22 +29,19 @@ class UserDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_details)
         (application as BaseApplication).netComponent.inject(this)
         currentUser = FirebaseAuth.getInstance().currentUser
+        setupPhoneInput()
         val calendar: Calendar = Calendar.getInstance()
-        Timber.v("Setting onDateSetListener")
         val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, monthOfYear)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateLabel()
         }
-        Timber.v("onDateSetListener set")
-        Timber.v("Setting on click listener")
-        dob.setOnFocusChangeListener({ view: View, b: Boolean ->
+        dob.setOnClickListener({
             DatePickerDialog(this, date, calendar
                     .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH)).show()
         })
-        Timber.v("on click listener set")
     }
 
     fun onClick(view: View) {
@@ -73,21 +71,39 @@ class UserDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFirstName(): String = first_name.text.toString()
+    private fun getFirstName(): String {
+        var firstName = first_name.text.toString()
+        if (TextUtils.isEmpty(firstName)) {
+            throw EmptyInputException("The firs name field was left empty")
+        } else {
+            return firstName
+        }
+    }
 
-    private fun getLastName(): String = last_name.text.toString()
+    private fun getLastName(): String {
+        var lastName = last_name.text.toString()
+        if (TextUtils.isEmpty(lastName)) {
+            throw EmptyInputException("The last name field was left empty")
+        } else {
+            return lastName
+        }
+    }
 
-    private fun getDOB(): Date = Date.valueOf(dob.text.toString())
+    private fun getDOB(): Date {
+        val format: DateFormat = SimpleDateFormat("mm/dd/yy")
+        return Date(format.parse(dob.text.toString()).time)
+    }
 
     private fun getCreationDate(): Timestamp = Timestamp(System.currentTimeMillis())
 
     private fun getPhone(): Phone {
-        val phoneText: String = phone_number.text.toString().replace("[^0-9]+", "")
-        if (TextUtils.isEmpty(phoneText)) {
-            throw EmptyInputException("The Phone number was left empty")
-        } else if () {
-        } else {
-            return Phone(phoneText.substring(0, 3).toInt(), phoneText.substring(3, 6).toInt(), phoneText.substring(6, 10).toInt())
+        val phoneText: String = phone_input_layout.phoneNumber
+        when {
+            !phone_input_layout.isValid -> {
+                Timber.v(phone_input_layout.phoneNumber)
+                throw EmptyInputException("The Phone number was invalid")
+            }
+            else -> return Phone(phoneText.substring(0, 3).toInt(), phoneText.substring(3, 6).toInt(), phoneText.substring(6, 10).toInt())
         }
     }
 
@@ -99,6 +115,7 @@ class UserDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupPhoneInput() {
-
+        phone_input_layout.setHint(R.string.hint_phone_number)
+        phone_input_layout.setDefaultCountry("US")
     }
 }
