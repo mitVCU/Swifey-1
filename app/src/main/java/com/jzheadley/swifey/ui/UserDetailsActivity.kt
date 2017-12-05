@@ -97,13 +97,18 @@ class UserDetailsActivity : AppCompatActivity() {
     private fun getCreationDate(): Timestamp = Timestamp(System.currentTimeMillis())
 
     private fun getPhone(): Phone {
-        val phoneText: String = phone_input_layout.phoneNumber
+        val phoneTextInverted: String = phone_input_layout.phoneNumber.reversed()
+        Timber.v("The phone number is:\t%s", phoneTextInverted.replace("[^0-9]+", ""))
         when {
             !phone_input_layout.isValid -> {
                 Timber.v(phone_input_layout.phoneNumber)
                 throw EmptyInputException("The Phone number was invalid")
             }
-            else -> return Phone(phoneText.substring(0, 3).toInt(), phoneText.substring(3, 6).toInt(), phoneText.substring(6, 10).toInt())
+//            else -> return Phone(phoneText.substring(0, 3).toInt(), phoneText.substring(3, 6).toInt(), phoneText.substring(6, 10).toInt())
+            else -> return Phone(phoneTextInverted.substring(10, phoneTextInverted.length).reversed().toInt(),
+                    phoneTextInverted.substring(7, 10).reversed().toInt(),
+                    phoneTextInverted.substring(4, 7).reversed().toInt(),
+                    phoneTextInverted.substring(0, 4).reversed().toInt())
         }
     }
 
