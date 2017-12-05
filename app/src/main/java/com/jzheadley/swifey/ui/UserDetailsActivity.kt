@@ -12,6 +12,7 @@ import com.jzheadley.swifey.base.BaseApplication
 import com.jzheadley.swifey.exceptions.EmptyInputException
 import com.jzheadley.swifey.models.Phone
 import com.jzheadley.swifey.models.User
+import com.jzheadley.swifey.network.SwifeyApi
 import kotlinx.android.synthetic.main.activity_user_details.*
 import timber.log.Timber
 import java.sql.Date
@@ -19,10 +20,15 @@ import java.sql.Timestamp
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 class UserDetailsActivity : AppCompatActivity() {
-    var currentUser: FirebaseUser? = null
+    private var currentUser: FirebaseUser? = null
+    @Inject
+    lateinit var api: SwifeyApi
+    var presenter: UserDetailsPresenter? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,7 @@ class UserDetailsActivity : AppCompatActivity() {
         (application as BaseApplication).netComponent.inject(this)
         currentUser = FirebaseAuth.getInstance().currentUser
         setupPhoneInput()
+        presenter = UserDetailsPresenter(api, this)
         val calendar: Calendar = Calendar.getInstance()
         val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
@@ -56,6 +63,7 @@ class UserDetailsActivity : AppCompatActivity() {
         try {
             val user = User(currentUser?.uid!!, getFirstName(), getLastName(), getDOB(), getCreationDate(), getNumSwipes(), getPhone(), listOf(), listOf(), listOf())
             Timber.v("UserDetails:\t%s", user.toString())
+            presenter?.sendUserToServer(user)
         } catch (exception: EmptyInputException) {
             Timber.e(exception, "One of the input fields was empty")
 
@@ -74,6 +82,7 @@ class UserDetailsActivity : AppCompatActivity() {
     private fun getFirstName(): String {
         var firstName = first_name.text.toString()
         if (TextUtils.isEmpty(firstName)) {
+            first_name_text_input_layout.error = "Please enter a first name"
             throw EmptyInputException("The firs name field was left empty")
         } else {
             return firstName
@@ -83,6 +92,7 @@ class UserDetailsActivity : AppCompatActivity() {
     private fun getLastName(): String {
         var lastName = last_name.text.toString()
         if (TextUtils.isEmpty(lastName)) {
+            last_name_text_input_layout.error = "Please enter a last name"
             throw EmptyInputException("The last name field was left empty")
         } else {
             return lastName
@@ -102,6 +112,7 @@ class UserDetailsActivity : AppCompatActivity() {
         when {
             !phone_input_layout.isValid -> {
                 Timber.v(phone_input_layout.phoneNumber)
+                phone_input_layout.setError("Invalid Phone Number")
                 throw EmptyInputException("The Phone number was invalid")
             }
 //            else -> return Phone(phoneText.substring(0, 3).toInt(), phoneText.substring(3, 6).toInt(), phoneText.substring(6, 10).toInt())
