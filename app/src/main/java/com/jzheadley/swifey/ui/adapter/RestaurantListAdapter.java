@@ -14,21 +14,19 @@ import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.ui.MealActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mit on 11/20/17.
- */
+import timber.log.Timber;
+
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<Restaurant> items;
 
-    public RestaurantListAdapter(Context context, ArrayList<Restaurant> items) {
+    public RestaurantListAdapter(Context context, List<Restaurant> items) {
         this.context = context;
         this.items = items;
-
+        Timber.v("Restaurants Adapter Initialized with restaurants:	%s", items);
     }
 
     @Override

@@ -16,6 +16,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 
 public class RestaurantListActivity extends AppCompatActivity {
     @Inject
@@ -34,17 +36,22 @@ public class RestaurantListActivity extends AppCompatActivity {
         ((BaseApplication) getApplication()).getNetComponent().inject(this);
         presenter = new RestaurantListPresenter(api, this);
         restaurants = new ArrayList<>();
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView = findViewById(R.id.my_recycler_view);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new RestaurantListAdapter(getApplicationContext(), restaurants);
+        mRecyclerView.setAdapter(mAdapter);
         presenter.getTodaysRestaurants();
     }
 
     public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
-        mAdapter = new RestaurantListAdapter(getApplicationContext(), (ArrayList<Restaurant>) restaurants);
+        Timber.v("Setting restaurants for today to:	%s", restaurants);
+
+        mAdapter = new RestaurantListAdapter(getApplicationContext(), restaurants);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 }

@@ -8,7 +8,6 @@ import android.support.annotation.MainThread;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,9 +15,10 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.jzheadley.swifey.R;
-import com.jzheadley.swifey.models.User;
 
 import java.util.Arrays;
+
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        temp = (Button) findViewById(R.id.button);
+        temp = findViewById(R.id.button);
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         rootView = findViewById(R.id.root);
-
-
     }
 
     @Override
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void determineLoginStatus() {
-        Log.d(TAG, "determineLoginStatus: deteriming login status");
+        Timber.d("determineLoginStatus: determining login status");
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
             startActivityForResult(
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case RC_USER_DETAILS:
                 FirebaseAuth auth = FirebaseAuth.getInstance();
-                User user = data.getParcelableExtra("userDetails");
+                // User user = data.getParcelableExtra("userDetails");
                 break;
         }
     }

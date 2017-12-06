@@ -1,9 +1,9 @@
 package com.jzheadley.swifey.models
 
-import java.sql.Timestamp
+import java.sql.Time
 
 data class SwipeTime(
         val swipeTimeId: Int,
-        var startTime: Timestamp,
-        var endTime: Timestamp,
+        var startTime: Time,
+        var endTime: Time,
         var meal: Meal?)

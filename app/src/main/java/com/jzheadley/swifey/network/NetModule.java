@@ -7,6 +7,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.jzheadley.swifey.gson.TimeDeserializer;
+
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -14,6 +16,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.sql.Time;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -47,6 +51,7 @@ public class NetModule {
     Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder = gsonBuilder.setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        gsonBuilder = gsonBuilder.registerTypeAdapter(Time.class, new TimeDeserializer());
         return gsonBuilder.create();
     }
 
