@@ -1,12 +1,14 @@
 package com.jzheadley.swifey.network;
 
 
+import com.jzheadley.swifey.models.Meal;
 import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.models.User;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 import java.util.List;
 
@@ -16,6 +18,9 @@ public interface SwifeyApi {
 
     @GET("/api/restaurants/today")
     Observable<List<Restaurant>> getTodaysRestaurants();
+
+    @GET("/api/restaurants/{id}/meals")
+    Observable<List<Meal>> getRestaurantMeals(@Path("id") int restaurantId);
 
     @POST("/api/users/")
     Observable<User> createUser(@Body User user);

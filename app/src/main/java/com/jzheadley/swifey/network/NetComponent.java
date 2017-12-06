@@ -2,6 +2,7 @@ package com.jzheadley.swifey.network;
 
 import com.jzheadley.swifey.base.AppModule;
 import com.jzheadley.swifey.ui.MainActivity;
+import com.jzheadley.swifey.ui.MealActivity;
 import com.jzheadley.swifey.ui.RestaurantListActivity;
 import com.jzheadley.swifey.ui.UserDetailsActivity;
 
@@ -17,6 +18,8 @@ public interface NetComponent {
     void inject(RestaurantListActivity restaurantListActivity);
 
     void inject(UserDetailsActivity userDetailsActivity);
+
+    void inject(MealActivity mealActivity);
 
     // void inject(VideoActivity activity);
 

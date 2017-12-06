@@ -20,8 +20,8 @@ import timber.log.Timber;
 
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    Context context;
-    List<Restaurant> items;
+    private Context context;
+    private List<Restaurant> items;
 
     public RestaurantListAdapter(Context context, List<Restaurant> items) {
         this.context = context;
@@ -39,7 +39,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((Item) holder).restaurantName.setText(items.get(position).getRestaurantName());
         // ((Item) holder).restaurantDesc.setText(items.get(position).getRestaurantDescription());
 
@@ -48,6 +48,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, MealActivity.class);
+                intent.putExtra("restaurant", items.get(position));
                 context.startActivity(intent);
             }
         });
@@ -61,14 +62,12 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public class Item extends RecyclerView.ViewHolder {
         ImageView restaurantImg;
         TextView restaurantName;
-        TextView restaurantDesc;
         CardView restaurantCard;
 
         public Item(View itemView) {
             super(itemView);
             restaurantImg = itemView.findViewById(R.id.restaurant_image);
             restaurantName = itemView.findViewById(R.id.restaurant_name);
-            restaurantDesc = itemView.findViewById(R.id.restaurant_description);
             restaurantCard = itemView.findViewById(R.id.restaurant_card);
         }
     }

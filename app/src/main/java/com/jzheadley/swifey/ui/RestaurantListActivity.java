@@ -49,7 +49,6 @@ public class RestaurantListActivity extends AppCompatActivity {
     public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
         Timber.v("Setting restaurants for today to:	%s", restaurants);
-
         mAdapter = new RestaurantListAdapter(getApplicationContext(), restaurants);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
