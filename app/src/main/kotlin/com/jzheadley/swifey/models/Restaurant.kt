@@ -7,5 +7,5 @@ data class Restaurant(
         var address: Address,
         var phone: Phone,
         var hours: Hours,
-        var swipeTimes: Set<SwipeTime>
+        var swipeTimes: List<SwipeTime>
 )

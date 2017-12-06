@@ -8,4 +8,4 @@ data class CheckIn(
         var maxNumOrders: Int,
         val checkedInUser: User?,
         val restaurantCheckedInAt: Restaurant?,
-        var orders: Set<Order>)
+        var orders: List<Order>)
