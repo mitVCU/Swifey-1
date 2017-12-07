@@ -38,12 +38,14 @@ public class CheckInPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Timber.e(e, "Something went wrong while submitting the checkIn");
+                        activity.finish();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        Timber.v("Finished submitting checkIn");
+                        activity.finish();
                     }
                 });
     }

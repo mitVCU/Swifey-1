@@ -41,7 +41,7 @@ public class RestaurantListActivity extends AppCompatActivity {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new RestaurantListAdapter(getApplicationContext(), restaurants);
+        mAdapter = new RestaurantListAdapter(this, restaurants);
         mRecyclerView.setAdapter(mAdapter);
         presenter.getTodaysRestaurants();
     }
@@ -49,7 +49,7 @@ public class RestaurantListActivity extends AppCompatActivity {
     public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
         Timber.v("Setting restaurants for today to:	%s", restaurants);
-        mAdapter = new RestaurantListAdapter(getApplicationContext(), restaurants);
+        mAdapter = new RestaurantListAdapter(this, restaurants);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
     }
