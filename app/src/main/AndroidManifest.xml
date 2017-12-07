@@ -22,7 +22,9 @@
         <activity android:name=".ui.MealActivity" />
         <activity android:name=".ui.RestaurantListActivity" />
         <activity android:name=".ui.UserDetailsActivity" />
-        <activity android:name=".ui.SearchActivity"></activity>
+        <activity android:name=".ui.SearchActivity" />
+        <activity android:name=".ui.PastCheckInActivity" />
+        <activity android:name=".ui.OrdersActivity"></activity>
     </application>
 
 </manifest>

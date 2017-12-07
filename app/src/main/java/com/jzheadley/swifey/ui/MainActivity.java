@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button temp;
     private View rootView;
     private Button temp2;
+    private Button pCheckIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        pCheckIn = findViewById(R.id.old_checkIns);
+        pCheckIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PastCheckInActivity.class);
                 startActivity(intent);
             }
         });

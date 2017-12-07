@@ -3,6 +3,7 @@ package com.jzheadley.swifey.network;
 import com.jzheadley.swifey.base.AppModule;
 import com.jzheadley.swifey.ui.MainActivity;
 import com.jzheadley.swifey.ui.MealActivity;
+import com.jzheadley.swifey.ui.PastCheckInActivity;
 import com.jzheadley.swifey.ui.RestaurantListActivity;
 import com.jzheadley.swifey.ui.SearchActivity;
 import com.jzheadley.swifey.ui.UserDetailsActivity;
@@ -23,6 +24,8 @@ public interface NetComponent {
     void inject(MealActivity mealActivity);
 
     void inject(SearchActivity searchActivity);
+
+    void inject (PastCheckInActivity pastCheckInActivity);
 
     // void inject(VideoActivity activity);
 
