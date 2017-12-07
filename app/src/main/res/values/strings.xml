@@ -14,4 +14,5 @@
     <string name="hint_phone_number">Phone Number</string>
     <string name="hint_num_swipes">Number of Swipes</string>
     <string name="submit_btn">Submit</string>
+    <string name="max_num_orders_hint">Maxium Number of Orders</string>
 </resources>

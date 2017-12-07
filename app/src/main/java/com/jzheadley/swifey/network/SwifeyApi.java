@@ -1,6 +1,7 @@
 package com.jzheadley.swifey.network;
 
 
+import com.jzheadley.swifey.models.CheckIn;
 import com.jzheadley.swifey.models.Meal;
 import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.models.User;
@@ -25,4 +26,6 @@ public interface SwifeyApi {
     @POST("/api/users/")
     Observable<User> createUser(@Body User user);
 
+    @POST("/api/checkins/")
+    Observable<CheckIn> postCheckIn(@Body CheckIn checkIn);
 }
