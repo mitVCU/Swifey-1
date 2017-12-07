@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.models.Restaurant;
-import com.jzheadley.swifey.ui.MealActivity;
+import com.jzheadley.swifey.ui.CheckInActivity;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-                Intent intent = new Intent(context, MealActivity.class);
+                Intent intent = new Intent(context, CheckInActivity.class);
                 intent.putExtra("restaurant", items.get(position));
                 context.startActivity(intent);
             }

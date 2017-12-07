@@ -12,11 +12,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class MealPresenter {
-    private final MealActivity activity;
+public class CheckInPresenter {
+    private final CheckInActivity activity;
     private final SwifeyApi api;
 
-    public MealPresenter(SwifeyApi api, MealActivity activity) {
+    public CheckInPresenter(SwifeyApi api, CheckInActivity activity) {
         this.api = api;
         this.activity = activity;
     }

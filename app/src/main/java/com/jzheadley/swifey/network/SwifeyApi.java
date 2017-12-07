@@ -6,13 +6,14 @@ import com.jzheadley.swifey.models.Meal;
 import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.models.User;
 
-import java.util.List;
-
-import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 public interface SwifeyApi {
 
@@ -30,4 +31,7 @@ public interface SwifeyApi {
 
     @POST("/api/checkins/")
     Observable<CheckIn> postCheckIn(@Body CheckIn checkIn);
+
+    @POST("/{id}/messagingId/{messagingId}")
+    Observable<Void> setUserMessagingId(@Path("id") String userId, @Path("messagingID") String messagingId);
 }
