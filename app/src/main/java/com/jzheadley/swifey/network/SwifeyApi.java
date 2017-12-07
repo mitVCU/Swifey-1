@@ -29,10 +29,11 @@ public interface SwifeyApi {
     Observable<List<CheckIn>>getCheckInById(@Path("userid") String userID);
 
     @POST("/api/users/")
-    Observable<User> createUser(@Body User user);
+    Observable<Void> createUser(@Body User user);
 
     @POST("/api/checkins/")
     Observable<CheckIn> postCheckIn(@Body CheckIn checkIn);
 
-
+    @POST("/{id}/messagingId/{messagingId}")
+    Observable<Void> setUserMessagingId(@Path("id") String userId, @Path("messagingID") String messagingId);
 }

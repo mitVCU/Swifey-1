@@ -28,8 +28,8 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class MealActivity extends AppCompatActivity {
-    private static final String TAG = "MealActivity";
+public class CheckInActivity extends AppCompatActivity {
+    private static final String TAG = "CheckInActivity";
 
     @Inject
     SwifeyApi api;
@@ -38,7 +38,7 @@ public class MealActivity extends AppCompatActivity {
     // private RecyclerView.Adapter mAdapter;
     // private RecyclerView.LayoutManager mLayoutManager;
     private List<Meal> meals;
-    private MealPresenter presenter;
+    private CheckInPresenter presenter;
     private EditText maxOrdersET;
     private Restaurant restaurant;
 
@@ -52,7 +52,7 @@ public class MealActivity extends AppCompatActivity {
         ((BaseApplication) getApplication()).getNetComponent().inject(this);
         // mLayoutManager = new LinearLayoutManager(this);
         // mRecyclerView.setLayoutManager(mLayoutManager);
-        presenter = new MealPresenter(api, this);
+        presenter = new CheckInPresenter(api, this);
         // mAdapter = new MealListAdapter(getApplicationContext(), meals);
         // mRecyclerView.setAdapter(mAdapter);
         Timber.v("RestaurantId:\t%s", restaurant);
@@ -84,8 +84,8 @@ public class MealActivity extends AppCompatActivity {
         } else {
             int maxOrders = Integer.parseInt(maxOrdersET.getText().toString());
             CheckIn checkIn = new CheckIn(null, new Timestamp(System.currentTimeMillis()), maxOrders,
-                    new User(FirebaseAuth.getInstance().getUid(), null, null, null, null, null, null, null, null, null),
-                    restaurant, new ArrayList<Order>());
+                    new User(FirebaseAuth.getInstance().getUid(), null, null, null, null, null, null, null, null, null, null),
+                    new Restaurant(restaurant.getRestaurantId(), restaurant.getRestaurantName(), null, null, null, null, null), new ArrayList<Order>());
             presenter.submitCheckIn(checkIn);
         }
     }

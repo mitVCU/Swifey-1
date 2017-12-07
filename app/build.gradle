@@ -34,7 +34,7 @@ ext {
     retrofitVersion = '2.3.0'
     okhttpVersion = '3.6.0'
     daggerVersion = '2.9'
-    playServicesVersion = '11.6.2'
+    playServicesVersion = '11.4.2'
     firebaseUIVersion = '3.1.0'
     glideVersion = '4.4.0'
 }
@@ -63,7 +63,7 @@ dependencies {
 
     compile "com.google.dagger:dagger:$daggerVersion"
     compile "com.firebaseui:firebase-ui-auth:$firebaseUIVersion"
-
+    compile "com.google.firebase:firebase-messaging:$playServicesVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'com.jakewharton.timber:timber:4.6.0'

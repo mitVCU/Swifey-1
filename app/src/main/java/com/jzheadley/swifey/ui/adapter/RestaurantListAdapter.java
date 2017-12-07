@@ -1,6 +1,5 @@
 package com.jzheadley.swifey.ui.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,8 @@ import android.widget.TextView;
 
 import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.models.Restaurant;
-import com.jzheadley.swifey.ui.MealActivity;
+import com.jzheadley.swifey.ui.CheckInActivity;
+import com.jzheadley.swifey.ui.RestaurantListActivity;
 
 import java.util.List;
 
@@ -20,18 +20,18 @@ import timber.log.Timber;
 
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context context;
+    private RestaurantListActivity activity;
     private List<Restaurant> items;
 
-    public RestaurantListAdapter(Context context, List<Restaurant> items) {
-        this.context = context;
+    public RestaurantListAdapter(RestaurantListActivity activity, List<Restaurant> items) {
+        this.activity = activity;
         this.items = items;
         Timber.v("Restaurants Adapter Initialized with restaurants:	%s", items);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(activity);
         View row = inflater.inflate(R.layout.restaurant_card, parent, false);
         Item item = new Item(row);
 
@@ -46,10 +46,10 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         ((Item) holder).restaurantCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, MealActivity.class);
+                Intent intent = new Intent(activity, CheckInActivity.class);
                 intent.putExtra("restaurant", items.get(position));
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.finish();
             }
         });
     }
