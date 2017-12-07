@@ -4,6 +4,7 @@ import com.jzheadley.swifey.base.AppModule;
 import com.jzheadley.swifey.ui.MainActivity;
 import com.jzheadley.swifey.ui.MealActivity;
 import com.jzheadley.swifey.ui.RestaurantListActivity;
+import com.jzheadley.swifey.ui.SearchActivity;
 import com.jzheadley.swifey.ui.UserDetailsActivity;
 
 import javax.inject.Singleton;
@@ -20,6 +21,8 @@ public interface NetComponent {
     void inject(UserDetailsActivity userDetailsActivity);
 
     void inject(MealActivity mealActivity);
+
+    void inject(SearchActivity searchActivity);
 
     // void inject(VideoActivity activity);
 

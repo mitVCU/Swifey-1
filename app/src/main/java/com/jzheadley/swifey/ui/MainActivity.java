@@ -1,7 +1,5 @@
 package com.jzheadley.swifey.ui;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
@@ -14,6 +12,7 @@ import android.widget.Button;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
 import com.jzheadley.swifey.R;
 
 import java.util.Arrays;
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_USER_DETAILS = 200;
     private Button temp;
     private View rootView;
+    private Button temp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        temp2 = findViewById(R.id.search);
+        temp2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
         rootView = findViewById(R.id.root);
     }
 
