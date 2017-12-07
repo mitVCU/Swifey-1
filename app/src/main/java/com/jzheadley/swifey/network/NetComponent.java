@@ -1,6 +1,7 @@
 package com.jzheadley.swifey.network;
 
 import com.jzheadley.swifey.base.AppModule;
+import com.jzheadley.swifey.network.notifications.FirebaseIDService;
 import com.jzheadley.swifey.ui.CheckInActivity;
 import com.jzheadley.swifey.ui.MainActivity;
 import com.jzheadley.swifey.ui.RestaurantListActivity;
@@ -23,6 +24,8 @@ public interface NetComponent {
     void inject(CheckInActivity mealActivity);
 
     void inject(SearchActivity searchActivity);
+
+    void inject(FirebaseIDService firebaseIDService);
 
     // void inject(VideoActivity activity);
 

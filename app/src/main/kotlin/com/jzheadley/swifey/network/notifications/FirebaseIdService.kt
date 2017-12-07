@@ -1,8 +1,11 @@
 package com.jzheadley.swifey.network.notifications
 
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
+import com.jzheadley.swifey.base.BaseApplication
 import com.jzheadley.swifey.network.SwifeyApi
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,6 +20,11 @@ class FirebaseIDService : FirebaseInstanceIdService() {
     @Inject
     lateinit var api: SwifeyApi
 
+    override fun onCreate() {
+        super.onCreate()
+        (this.application as BaseApplication).netComponent.inject(this)
+    }
+
     override fun onTokenRefresh() {
         // Get updated InstanceID token.
         val refreshedToken = FirebaseInstanceId.getInstance().token
@@ -24,6 +32,13 @@ class FirebaseIDService : FirebaseInstanceIdService() {
 
         // TODO: Implement this method to send any registration to your app's servers.
         sendRegistrationToServer(refreshedToken)
+    }
+
+    private fun storeRegistrationToken(refreshedToken: String?) {
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor: SharedPreferences.Editor = prefs.edit()
+        editor.putString("fcm_id_token", refreshedToken)
+        editor.apply()
     }
 
     /**
@@ -38,6 +53,7 @@ class FirebaseIDService : FirebaseInstanceIdService() {
         Timber.v("The new FirebaseId is:\t%s", token)
         val uid = FirebaseAuth.getInstance().uid
         if (uid != null) {
+            Timber.v("Sending the new firebase token to the server")
             api.setUserMessagingId(uid, token)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -59,6 +75,9 @@ class FirebaseIDService : FirebaseInstanceIdService() {
                         }
 
                     })
+        } else {
+            Timber.v("Storing firebase token for later use since the user is not yet logged in.")
+            storeRegistrationToken(token)
         }
     }
 }

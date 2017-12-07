@@ -1,7 +1,9 @@
 package com.jzheadley.swifey.ui
 
 import android.app.DatePickerDialog
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
@@ -61,14 +63,20 @@ class UserDetailsActivity : AppCompatActivity() {
 
     private fun submitUserDetails() {
         try {
-            val user = User(currentUser?.uid!!, getFirstName(), getLastName(), getDOB(), getCreationDate(), getNumSwipes(), getPhone(), listOf(), listOf(), listOf())
-            Timber.v("UserDetails:\t%s", user.toString())
+            val user = User(currentUser?.uid!!, getFirstName(), getLastName(), getDOB(), getCreationDate(), getNumSwipes(), getPhone(), listOf(), listOf(), listOf(), getMessagingId())
+            Timber.v("The token was ${getMessagingId()}")
             presenter?.sendUserToServer(user)
         } catch (exception: EmptyInputException) {
             Timber.e(exception, "One of the input fields was empty")
 
         }
 
+    }
+
+    private fun getMessagingId(): String? {
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        Timber.v("pulling fcmToken from sharedPrefs")
+        return prefs.getString("fcm_id_token", null)
     }
 
     private fun getNumSwipes(): Int {

@@ -84,7 +84,7 @@ public class CheckInActivity extends AppCompatActivity {
         } else {
             int maxOrders = Integer.parseInt(maxOrdersET.getText().toString());
             CheckIn checkIn = new CheckIn(null, new Timestamp(System.currentTimeMillis()), maxOrders,
-                    new User(FirebaseAuth.getInstance().getUid(), null, null, null, null, null, null, null, null, null),
+                    new User(FirebaseAuth.getInstance().getUid(), null, null, null, null, null, null, null, null, null, null),
                     new Restaurant(restaurant.getRestaurantId(), restaurant.getRestaurantName(), null, null, null, null, null), new ArrayList<Order>());
             presenter.submitCheckIn(checkIn);
         }

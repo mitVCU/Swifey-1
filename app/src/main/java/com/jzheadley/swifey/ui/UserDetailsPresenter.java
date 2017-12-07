@@ -22,25 +22,26 @@ public class UserDetailsPresenter {
         api.createUser(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<User>() {
+                .subscribe(new Observer<Void>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(User user) {
-                        Timber.v(String.valueOf(user));
+                    public void onNext(Void v) {
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Timber.e(e, "Error in sending user to server");
+                        activity.finish();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        Timber.v("Finished sending user to server");
+                        activity.finish();
                     }
                 });
     }

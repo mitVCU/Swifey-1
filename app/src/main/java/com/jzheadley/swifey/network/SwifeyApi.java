@@ -27,7 +27,7 @@ public interface SwifeyApi {
     Observable<List<User>>getSearch(@Path("searchString") String search);
 
     @POST("/api/users/")
-    Observable<User> createUser(@Body User user);
+    Observable<Void> createUser(@Body User user);
 
     @POST("/api/checkins/")
     Observable<CheckIn> postCheckIn(@Body CheckIn checkIn);

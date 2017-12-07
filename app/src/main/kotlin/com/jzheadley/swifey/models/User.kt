@@ -18,5 +18,6 @@ data class User(
         var phone: Phone?,
         var checkIns: List<CheckIn>?,
         var followers: List<User>?,
-        var following: List<User>?
+        var following: List<User>?,
+        var messagingId: String?
 ) : Parcelable
