@@ -2,6 +2,7 @@ package com.jzheadley.swifey.network;
 
 
 import com.jzheadley.swifey.models.CheckIn;
+import com.jzheadley.swifey.models.Following;
 import com.jzheadley.swifey.models.Meal;
 import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.models.User;
@@ -39,4 +40,7 @@ public interface SwifeyApi {
 
     @POST("/{id}/messagingId/{messagingId}")
     Observable<Void> setUserMessagingId(@Path("id") String userId, @Path("messagingID") String messagingId);
+
+    @POST("/api/users/follow")
+    Observable<Void> postFollowing(Following following);
 }

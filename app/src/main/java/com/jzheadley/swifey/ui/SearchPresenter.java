@@ -1,6 +1,7 @@
 package com.jzheadley.swifey.ui;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.jzheadley.swifey.models.Following;
 import com.jzheadley.swifey.models.User;
 import com.jzheadley.swifey.network.SwifeyApi;
 
@@ -80,6 +81,36 @@ public class SearchPresenter {
                     @Override
                     public void onComplete() {
                         Timber.v("Finished Getting followers");
+                    }
+                });
+    }
+
+    public void postFollowing(Following following){
+        api.postFollowing(following)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Void>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Timber.v("subscribing for followers of user");
+
+                    }
+
+                    @Override
+                    public void onNext(Void aVoid) {
+                        Timber.d("nexting");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.wtf(e, "WTF Happened");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Timber.v("Finished adding followers");
+
                     }
                 });
     }

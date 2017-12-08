@@ -1,18 +1,20 @@
 package com.jzheadley.swifey.ui.adapter;
 
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.jzheadley.swifey.R;
+import com.jzheadley.swifey.models.Following;
 import com.jzheadley.swifey.models.User;
-import com.jzheadley.swifey.ui.CheckInActivity;
 import com.jzheadley.swifey.ui.SearchActivity;
+import com.jzheadley.swifey.ui.SearchPresenter;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ import timber.log.Timber;
 
 public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private SearchActivity activity;
+    private SearchPresenter presenter;
     private List<User> items;
 
     public SearchAdapter(SearchActivity activity, List<User> items) {
@@ -43,12 +46,14 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        ((Item) holder).userName.setText(items.get(position).getFirstName()+items.get(position).getLastName());
-        ((Item) holder).followCard.setOnClickListener(new View.OnClickListener() {
+        ((Item) holder).userName.setText(items.get(position).getFirstName() + items.get(position).getLastName());
+        ((Item) holder).follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, CheckInActivity.class);
+                presenter.postFollowing(new Following(FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                        new User(items.get(position).getUserId(), null, null, null, null, null, null, null, null, null, null)));
             }
+
         });
     }
 
@@ -61,12 +66,14 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ImageView userImg;
         TextView userName;
         CardView followCard;
+        Button follow;
 
         public Item(View itemView) {
             super(itemView);
             userImg = itemView.findViewById(R.id.user_image);
             userName = itemView.findViewById(R.id.user_name);
             followCard = itemView.findViewById(R.id.follow_card);
+            follow = itemView.findViewById(R.id.followBtn);
         }
     }
 }

@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Timber.v("searchText: %s", searchText);
-                presenter.getSearch(getSearchText());
+                presenter.getSearch();
             }
         });
 
