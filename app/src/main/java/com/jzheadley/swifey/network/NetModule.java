@@ -1,23 +1,30 @@
 package com.jzheadley.swifey.network;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.jzheadley.swifey.gson.TimeDeserializer;
+
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class NetModule {
@@ -45,7 +52,7 @@ public class NetModule {
     Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder = gsonBuilder.setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-     //   gsonBuilder = gsonBuilder.registerTypeHierarchyAdapter(Time.class, new TimeDeserializer());
+        gsonBuilder = gsonBuilder.registerTypeHierarchyAdapter(Time.class, new TimeDeserializer());
         return gsonBuilder.create();
     }
 
@@ -77,6 +84,7 @@ public class NetModule {
     OkHttpClient provideOkHttpDebugClient(Cache cache, HttpLoggingInterceptor loggingInterceptor) {
         return new OkHttpClient.Builder()
                 .cache(cache)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .addNetworkInterceptor(loggingInterceptor)
                 .build();
     }

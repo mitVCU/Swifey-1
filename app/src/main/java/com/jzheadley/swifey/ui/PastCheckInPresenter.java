@@ -1,6 +1,7 @@
 package com.jzheadley.swifey.ui;
 
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.jzheadley.swifey.models.CheckIn;
 import com.jzheadley.swifey.network.SwifeyApi;
 
@@ -12,9 +13,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-/**
- * Created by mit on 12/7/17.
- */
 
 class PastCheckInPresenter {
     private final PastCheckInActivity activity;
@@ -27,7 +25,7 @@ class PastCheckInPresenter {
 
     public void getCheckInById(){
         String currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        api.getCheckInById("IFxX0KIatEbijblNa22S7O5WeMw1")
+        api.getCheckInById(currentUserID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<CheckIn>>() {
