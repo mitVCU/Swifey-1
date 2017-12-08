@@ -6,11 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.models.Meal;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -18,25 +22,41 @@ public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
     private List<Meal> meals;
 
+    private HashSet<Meal> selectedMeals;
+
     public MealListAdapter(Context context, List<Meal> meals) {
         this.context = context;
         this.meals = meals;
+        this.selectedMeals = new HashSet<>();
+    }
+
+    public ArrayList<Meal> getSelectedMeals() {
+        return new ArrayList<>(selectedMeals);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View row = inflater.inflate(R.layout.meal_card, parent, false);
-        Item item = new Item(row);
 
-        return item;
+        return new Item(row);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((Item) holder).mealName.setText(meals.get(position).getMealName());
         ((Item) holder).mealDesc.setText(meals.get(position).getMealDesc());
-        //      ((Item)holder).mealCost.setText(meals.get(position).getMealCost());
+        ((Item) holder).mealCost.setText(meals.get(position).getMealCost() + " Swipes");
+        ((Item) holder).checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    selectedMeals.add(meals.get(position));
+                } else {
+                    selectedMeals.remove(meals.get(position));
+                }
+            }
+        });
     }
 
     @Override
@@ -45,11 +65,11 @@ public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public class Item extends RecyclerView.ViewHolder {
-        // ImageView mealIMG;
         TextView mealName;
         TextView mealCost;
         TextView mealDesc;
         CardView mealCard;
+        CheckBox checkBox;
 
         public Item(View itemView) {
             super(itemView);
@@ -58,6 +78,7 @@ public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mealCost = itemView.findViewById(R.id.meal_cost);
             mealDesc = itemView.findViewById(R.id.meal_desc);
             mealCard = itemView.findViewById(R.id.meal_card);
+            checkBox = itemView.findViewById(R.id.meal_select_cb);
         }
     }
 }

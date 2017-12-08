@@ -1,9 +1,11 @@
 package com.jzheadley.swifey.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.google.gson.Gson
 import com.jzheadley.swifey.R
 import com.jzheadley.swifey.base.BaseApplication
@@ -26,6 +28,8 @@ class PlaceOrderActivity : AppCompatActivity() {
     private var meals: List<Meal>? = ArrayList()
     private var checkIn: CheckIn? = null
     private var presenter: PlaceOrderPresenter? = null
+    private var mealAdapter: MealListAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place_order)
@@ -36,13 +40,24 @@ class PlaceOrderActivity : AppCompatActivity() {
         checkIn = gson.fromJson(intent.extras.getString("checkIn"), CheckIn::class.java)
         Timber.v("The check in was:\t%s", checkIn)
         meal_recycler_view.layoutManager = mLayoutManager
-        meal_recycler_view.adapter = MealListAdapter(this, meals)
+        mealAdapter = MealListAdapter(this, meals)
+        meal_recycler_view.adapter = mealAdapter
         presenter?.getRestaurantsMeals(checkIn?.restaurantCheckedInAt?.restaurantId)
 
     }
 
+    fun onClick(view: View) {
+        Timber.v("The selected meals are:\t%s", mealAdapter?.selectedMeals)
+        Timber.v("The user has selected %s meals.", mealAdapter?.selectedMeals?.count())
+        val intent = Intent(this, OrderReviewActivity::class.java)
+        intent.putExtra("selectedMeals", mealAdapter?.selectedMeals)
+        startActivity(intent)
+    }
+
     fun setMeals(meals: List<Meal>) {
         this.meals = meals
-        meal_recycler_view.adapter = MealListAdapter(this, meals)
+        mealAdapter = MealListAdapter(this, meals)
+        meal_recycler_view.adapter = mealAdapter
+
     }
 }

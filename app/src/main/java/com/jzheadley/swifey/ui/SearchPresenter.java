@@ -1,6 +1,7 @@
 package com.jzheadley.swifey.ui;
 
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.jzheadley.swifey.models.Following;
 import com.jzheadley.swifey.models.User;
 import com.jzheadley.swifey.network.SwifeyApi;
@@ -26,8 +27,8 @@ public class SearchPresenter {
         this.activity = activity;
     }
 
-    public void getSearch(){
-        api.getSearch(activity.getSearchText())
+    public void getSearch(String searchText) {
+        api.getSearch(searchText)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<User>>() {

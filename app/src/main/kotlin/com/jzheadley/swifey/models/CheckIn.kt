@@ -11,6 +11,7 @@ data class CheckIn(
         val checkInId: Int?,
         var checkInDate: Timestamp,
         var maxNumOrders: Int,
+        var acceptingOrders: Boolean?,
         val checkedInUser: User?,
         val restaurantCheckedInAt: Restaurant?,
         var orders: List<Order>) : Parcelable

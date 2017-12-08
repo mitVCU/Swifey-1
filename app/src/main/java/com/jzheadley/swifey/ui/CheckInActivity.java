@@ -38,7 +38,7 @@ public class CheckInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meal_list);
+        setContentView(R.layout.activity_check_in);
         restaurant = getIntent().getParcelableExtra("restaurant");
         ((BaseApplication) getApplication()).getNetComponent().inject(this);
         presenter = new CheckInPresenter(api, this);
@@ -52,8 +52,8 @@ public class CheckInActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(restaurant.getRestaurantPhotoUrl())
                 .into((ImageView) findViewById(R.id.restaurant_image));
-        maxOrdersET = (EditText) findViewById(R.id.maxOrders_tiet);
-
+        maxOrdersET = findViewById(R.id.maxOrders_tiet);
+        findViewById(R.id.maxOrders_til).requestFocus();
     }
 
     public void onClick(View view) {
@@ -64,7 +64,7 @@ public class CheckInActivity extends AppCompatActivity {
             maxOrdersET.setError("Invalid Input");
         } else {
             int maxOrders = Integer.parseInt(maxOrdersET.getText().toString());
-            CheckIn checkIn = new CheckIn(null, new Timestamp(System.currentTimeMillis()), maxOrders,
+            CheckIn checkIn = new CheckIn(null, new Timestamp(System.currentTimeMillis()), maxOrders, true,
                     new User(FirebaseAuth.getInstance().getUid(), null, null, null, null, null, null, null, null, null, null),
                     new Restaurant(restaurant.getRestaurantId(), restaurant.getRestaurantName(), null, null, null, null, null), new ArrayList<Order>());
             presenter.submitCheckIn(checkIn);
