@@ -14,7 +14,6 @@ import com.jzheadley.swifey.models.Meal;
 import java.util.List;
 
 public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final String TAG = "meal adapter";
 
     private Context context;
     private List<Meal> meals;

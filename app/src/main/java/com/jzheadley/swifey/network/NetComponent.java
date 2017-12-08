@@ -5,9 +5,12 @@ import com.jzheadley.swifey.network.notifications.FirebaseIDService;
 import com.jzheadley.swifey.ui.CheckInActivity;
 import com.jzheadley.swifey.ui.MainActivity;
 import com.jzheadley.swifey.ui.PastCheckInActivity;
+import com.jzheadley.swifey.ui.PlaceOrderActivity;
 import com.jzheadley.swifey.ui.RestaurantListActivity;
 import com.jzheadley.swifey.ui.SearchActivity;
 import com.jzheadley.swifey.ui.UserDetailsActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Singleton;
 
@@ -29,6 +32,8 @@ public interface NetComponent {
     void inject (PastCheckInActivity pastCheckInActivity);
 
     void inject(FirebaseIDService firebaseIDService);
+
+    void inject(@NotNull PlaceOrderActivity placeOrderActivity);
 
     // void inject(VideoActivity activity);
 

@@ -23,8 +23,16 @@
         <activity android:name=".ui.RestaurantListActivity" />
         <activity android:name=".ui.UserDetailsActivity" />
         <activity android:name=".ui.PastCheckInActivity" />
-        <activity android:name=".ui.OrdersActivity"></activity>
+        <activity android:name=".ui.OrdersActivity" />
         <activity android:name=".ui.SearchActivity" />
+
+        <activity android:name=".ui.PlaceOrderActivity">
+            <intent-filter>
+                <action android:name="RESTAURANT_MENU_FROM_CHECKIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".network.notifications.MessagingService">
             <intent-filter>

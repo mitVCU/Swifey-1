@@ -18,4 +18,5 @@
     <string name="title_activity_user">UserActivity</string>
     <string name="search">Search</string>
     <string name="check_ins">Past Check In</string>
+    <string name="place_your_order_tv">Please place your order:</string>
 </resources>

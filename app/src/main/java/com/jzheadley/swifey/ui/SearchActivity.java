@@ -32,42 +32,39 @@ public class SearchActivity extends AppCompatActivity {
     private SearchPresenter presenter;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Object d = this;
         ((BaseApplication) getApplication()).getNetComponent().inject(this);
         presenter = new SearchPresenter(api, this);
         users = new ArrayList<>();
         query = findViewById(R.id.search_bar);
         mRecyclerView = findViewById(R.id.follower_recycler_view);
-        mLayoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
         search = findViewById(R.id.search_button);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchText =query.getText().toString();
-                getSearchText();
-                Timber.v("searchText: "+searchText);
-
-                presenter.getSearch();
+                Timber.v("searchText: %s", searchText);
+                presenter.getSearch(getSearchText());
             }
         });
 
     }
 
     public String getSearchText() {
-        return this.searchText;
+        return query.getText().toString();
     }
 
     public void setUsers(List<User> users) {
         this.users = users;
-        Timber.v("user to follow"+ users);
+        Timber.v("user to follow%s", users);
         mAdapter = new SearchAdapter(this, users);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
