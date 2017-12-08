@@ -40,7 +40,7 @@ class UserDetailsActivity : AppCompatActivity() {
         setupPhoneInput()
         presenter = UserDetailsPresenter(api, this)
         val calendar: Calendar = Calendar.getInstance()
-        val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val date = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, monthOfYear)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)

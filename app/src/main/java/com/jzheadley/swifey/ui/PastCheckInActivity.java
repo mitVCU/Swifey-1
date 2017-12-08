@@ -35,7 +35,6 @@ public class PastCheckInActivity extends AppCompatActivity {
         presenter = new PastCheckInPresenter(api, this);
         checkIns = new ArrayList<>();
         mRecyclerView = findViewById(R.id.check_in_recycler_view);
-
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new PastCheckInAdapter(this, checkIns);

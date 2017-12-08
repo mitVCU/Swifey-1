@@ -28,6 +28,9 @@ public interface SwifeyApi {
     @GET("/api/users/userid/{userid}/checkIns")
     Observable<List<CheckIn>>getCheckInById(@Path("userid") String userID);
 
+    @GET("/api/users/{id}/follows")
+    Observable<List<User>>getFollowersOfUser(@Path("id") String id);
+
     @POST("/api/users/")
     Observable<Void> createUser(@Body User user);
 

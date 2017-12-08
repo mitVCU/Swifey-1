@@ -1,5 +1,6 @@
 package com.jzheadley.swifey.ui;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.jzheadley.swifey.models.User;
 import com.jzheadley.swifey.network.SwifeyApi;
 
@@ -53,5 +54,33 @@ public class SearchPresenter {
                 });
 
 
+    }
+
+    public void getFollowersOfUser(){
+        api.getFollowersOfUser(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<User>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                            Timber.d("subscribing for followers of user");
+                    }
+
+                    @Override
+                    public void onNext(List<User> users) {
+                        Timber.v("Got followers back"+users.toString());
+                        activity.setUsers(users);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.wtf(e, "WTF Happened");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Timber.v("Finished Getting followers");
+                    }
+                });
     }
 }
