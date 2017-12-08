@@ -52,20 +52,16 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Timber.v("searchText: %s", searchText);
-                presenter.getSearch();
+                presenter.getSearch(query.getText().toString());
             }
         });
 
     }
 
-    public String getSearchText() {
-        return query.getText().toString();
-    }
-
     public void setUsers(List<User> users) {
         this.users = users;
         Timber.v("user to follow%s", users);
-        mAdapter = new SearchAdapter(this, users);
+        mAdapter = new SearchAdapter(this, presenter, users);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 

@@ -41,6 +41,6 @@ public interface SwifeyApi {
     @POST("/{id}/messagingId/{messagingId}")
     Observable<Void> setUserMessagingId(@Path("id") String userId, @Path("messagingID") String messagingId);
 
-    @POST("/api/users/follow")
-    Observable<Void> postFollowing(Following following);
+    @POST("/api/users/following")
+    Observable<Void> postFollowing(@Body Following following);
 }

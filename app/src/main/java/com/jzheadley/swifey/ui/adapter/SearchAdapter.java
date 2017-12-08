@@ -29,8 +29,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private SearchPresenter presenter;
     private List<User> items;
 
-    public SearchAdapter(SearchActivity activity, List<User> items) {
+    public SearchAdapter(SearchActivity activity, SearchPresenter presenter, List<User> items) {
         this.activity = activity;
+        this.presenter = presenter;
         this.items = items;
         Timber.v("search adapter Initialized with userss:	%s", items);
     }
