@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="order_cost_tv">
+        <item quantity="one">Cost: %1$d Swipe</item>
+        <item quantity="other">Cost: %1$d Swipes</item>
+    </plurals>
+</resources>

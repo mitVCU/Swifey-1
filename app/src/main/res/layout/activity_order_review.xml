@@ -1,15 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     tools:context="com.jzheadley.swifey.ui.OrderReviewActivity">
 
-    <TextView
-        android:id="@+id/order_review_title_tv"
+    <RelativeLayout
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_width="wrap_content"
-        android:text="@string/order_review_title_txt"
-        android:textSize="24sp" />
-</RelativeLayout>
+        android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/order_review_title_tv"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:text="@string/order_review_title_txt"
+            android:textSize="24sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/selected_meals_rv"
+            android:layout_below="@+id/order_review_title_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <TextView
+            android:id="@+id/order_cost_tv"
+            android:layout_below="@+id/selected_meals_rv"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/discount_code_til"
+            android:layout_below="@+id/order_cost_tv"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent">
+
+            <EditText
+                android:hint="@string/discount_code_hint"
+                android:id="@+id/discount_code_et"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/special_requests_til"
+            android:layout_below="@+id/discount_code_til"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent">
+
+            <EditText
+                android:hint="@string/special_requests_hint"
+                android:id="@+id/special_requests"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:lines="4" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/place_order_btn"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:text="@string/place_order_btn_txt" />
+    </RelativeLayout>
+</ScrollView>

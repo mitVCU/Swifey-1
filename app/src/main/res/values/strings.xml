@@ -22,4 +22,7 @@
     <string name="review_order_btn_text">Review Order</string>
     <string name="order_review_title_txt">Please Review Your Order:</string>
     <string name="Follow">Follow</string>
+    <string name="discount_code_hint">Discount Code</string>
+    <string name="special_requests_hint">Special Requests</string>
+    <string name="place_order_btn_txt">Place Order</string>
 </resources>

@@ -13,6 +13,6 @@ data class Order(
         var orderDate: Timestamp,
         var specialRequest: String,
         var checkIn: CheckIn?,
-        var orderedMeal: Meal?,
+        var orderedMeals: List<Meal>?,
         var user: User?
 ) : Parcelable

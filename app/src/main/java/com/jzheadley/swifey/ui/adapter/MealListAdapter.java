@@ -19,13 +19,13 @@ import java.util.List;
 
 public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
+    private Context activity;
     private List<Meal> meals;
 
     private HashSet<Meal> selectedMeals;
 
-    public MealListAdapter(Context context, List<Meal> meals) {
-        this.context = context;
+    public MealListAdapter(Context activity, List<Meal> meals) {
+        this.activity = activity;
         this.meals = meals;
         this.selectedMeals = new HashSet<>();
     }
@@ -36,7 +36,7 @@ public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(activity);
         View row = inflater.inflate(R.layout.meal_card, parent, false);
 
         return new Item(row);
@@ -44,16 +44,18 @@ public class MealListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        ((Item) holder).mealName.setText(meals.get(position).getMealName());
-        ((Item) holder).mealDesc.setText(meals.get(position).getMealDesc());
-        ((Item) holder).mealCost.setText(meals.get(position).getMealCost() + " Swipes");
+        final Meal meal = meals.get(position);
+        ((Item) holder).mealName.setText(meal.getMealName());
+        ((Item) holder).mealDesc.setText(meal.getMealDesc());
+
+        ((Item) holder).mealCost.setText(String.format(activity.getResources().getQuantityString(R.plurals.order_cost_tv, meal.getMealCost()), meal.getMealCost()));
         ((Item) holder).checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    selectedMeals.add(meals.get(position));
+                    selectedMeals.add(meal);
                 } else {
-                    selectedMeals.remove(meals.get(position));
+                    selectedMeals.remove(meal);
                 }
             }
         });
