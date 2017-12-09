@@ -26,4 +26,5 @@
     <string name="special_requests_hint">Special Requests</string>
     <string name="place_order_btn_txt">Place Order</string>
     <string name="validate_discount_btn_txt">Validate</string>
+    <string name="LeFin">Le Fin</string>
 </resources>

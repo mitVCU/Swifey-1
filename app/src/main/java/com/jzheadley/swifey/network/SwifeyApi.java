@@ -9,14 +9,13 @@ import com.jzheadley.swifey.models.Order;
 import com.jzheadley.swifey.models.Restaurant;
 import com.jzheadley.swifey.models.User;
 
+import java.util.List;
+
+import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-
-import java.util.List;
-
-import io.reactivex.Observable;
 
 public interface SwifeyApi {
 
@@ -34,6 +33,9 @@ public interface SwifeyApi {
 
     @GET("/api/users/{id}/follows")
     Observable<List<User>> getFollowersOfUser(@Path("id") String id);
+
+    @POST("/api/checkins/{id}/close")
+    Observable<Void> closeCheckIn(@Path("id") int id);
 
     @POST("/api/users/")
     Observable<Void> createUser(@Body User user);

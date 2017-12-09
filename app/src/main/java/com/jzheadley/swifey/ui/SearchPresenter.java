@@ -1,7 +1,6 @@
 package com.jzheadley.swifey.ui;
 
 import com.google.firebase.auth.FirebaseAuth;
-
 import com.jzheadley.swifey.models.Following;
 import com.jzheadley.swifey.models.User;
 import com.jzheadley.swifey.network.SwifeyApi;
@@ -65,7 +64,7 @@ public class SearchPresenter {
                 .subscribe(new Observer<List<User>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                            Timber.d("subscribing for followers of user");
+                        Timber.v("subscribing for followers of user");
                     }
 
                     @Override

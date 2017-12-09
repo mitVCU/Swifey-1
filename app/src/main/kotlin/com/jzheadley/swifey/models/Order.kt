@@ -10,7 +10,7 @@ import java.sql.Timestamp
 @Parcelize
 data class Order(
         val orderId: Int?,
-        var orderDate: Timestamp,
+        var orderDate: Timestamp?,
         var specialRequest: String,
         var checkIn: CheckIn?,
         var orderedMeals: List<Meal>?,

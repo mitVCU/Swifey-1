@@ -45,7 +45,7 @@ public class PastCheckInActivity extends AppCompatActivity {
     public void setCheckIns(List<CheckIn> checkIns) {
         this.checkIns = checkIns;
         Timber.v("these are your old checkins "+ checkIns.toString());
-        mAdapter = new PastCheckInAdapter(getApplicationContext(), checkIns);
+        mAdapter = new PastCheckInAdapter(this, checkIns);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
     }

@@ -1,5 +1,6 @@
 package com.jzheadley.swifey.ui.adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +9,14 @@ import android.widget.TextView;
 
 import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.models.Meal;
-import com.jzheadley.swifey.ui.OrderReviewActivity;
 
 import java.util.List;
 
 public class OrderReviewAdapter extends RecyclerView.Adapter<OrderReviewAdapter.ViewHolder> {
-    private OrderReviewActivity activity;
+    private Activity activity;
     private List<Meal> meals;
 
-    public OrderReviewAdapter(OrderReviewActivity activity, List<Meal> meals) {
+    public OrderReviewAdapter(Activity activity, List<Meal> meals) {
         this.activity = activity;
         this.meals = meals;
     }

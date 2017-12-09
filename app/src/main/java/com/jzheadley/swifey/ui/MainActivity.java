@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private View rootView;
     private Button temp2;
     private Button pCheckIn;
+    private Button update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         rootView = findViewById(R.id.root);
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.jzheadley.swifey.R;
 import com.jzheadley.swifey.models.CheckIn;
 import com.jzheadley.swifey.ui.OrdersActivity;
+import com.jzheadley.swifey.ui.PastCheckInActivity;
 
 import java.util.List;
 
@@ -22,11 +23,11 @@ import timber.log.Timber;
  */
 
 public class PastCheckInAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context context;
     private List<CheckIn> items;
+    private PastCheckInActivity activity;
 
-    public PastCheckInAdapter(Context context, List<CheckIn> items){
-        this.context = context;
+    public PastCheckInAdapter(PastCheckInActivity activity, List<CheckIn> items) {
+        this.activity = activity;
         this.items = items;
         Timber.v("checkIn adapts init");
     }
@@ -34,7 +35,7 @@ public class PastCheckInAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(activity);
         View row = inflater.inflate(R.layout.check_in_card, parent, false);
         Item item = new Item(row);
 
@@ -50,8 +51,10 @@ public class PastCheckInAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, OrdersActivity.class);
-                intent.putExtra("check In", items.get(position));
-                context.startActivity(intent);
+                intent.putExtra("checkIn", items.get(position));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
+
             }
         });
     }
