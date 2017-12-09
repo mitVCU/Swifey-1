@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.jzheadley.swifey.R
 import com.jzheadley.swifey.base.BaseApplication
-import com.jzheadley.swifey.models.CheckIn
-import com.jzheadley.swifey.models.Meal
-import com.jzheadley.swifey.models.Order
-import com.jzheadley.swifey.models.User
+import com.jzheadley.swifey.models.*
 import com.jzheadley.swifey.network.SwifeyApi
 import com.jzheadley.swifey.ui.adapter.OrderReviewAdapter
 import kotlinx.android.synthetic.main.activity_order_review.*
@@ -49,7 +47,19 @@ class OrderReviewActivity : AppCompatActivity() {
             presenter?.submitOrder(Order(null, Timestamp(System.currentTimeMillis()), special_requests.text.toString(), checkIn, selectedMeals,
                     User(FirebaseAuth.getInstance().currentUser?.uid, null, null, null, null, null, null, null, null, null, null)))
         }
+        validate_discount_btn.setOnClickListener({
+            val discountCode = discount_code_et.text.toString();
+            if (TextUtils.isEmpty(discountCode)) {
+                discount_code_et.error = "Please enter a discount code"
+            } else {
+                presenter?.validateDiscountCode(DiscountCheckDTO(discountCode, selectedMeals))
+            }
+        })
     }
 
     private fun getTotalCost(meals: List<Meal>) = meals.map(Meal::mealCost).sum()
+
+    fun handleValidateDiscountResponse(response: Boolean) {
+        Timber.v("Validating the response of the Discount check:\t%s", response)
+    }
 }

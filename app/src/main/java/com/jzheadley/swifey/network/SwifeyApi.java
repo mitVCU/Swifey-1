@@ -2,6 +2,7 @@ package com.jzheadley.swifey.network;
 
 
 import com.jzheadley.swifey.models.CheckIn;
+import com.jzheadley.swifey.models.DiscountCheckDTO;
 import com.jzheadley.swifey.models.Following;
 import com.jzheadley.swifey.models.Meal;
 import com.jzheadley.swifey.models.Order;
@@ -48,4 +49,7 @@ public interface SwifeyApi {
 
     @POST("/api/orders/")
     Observable<Void> postOrder(@Body Order order);
+
+    @POST("/api/discounts/check")
+    Observable<Boolean> validateDiscount(@Body DiscountCheckDTO discountCheckDTO);
 }

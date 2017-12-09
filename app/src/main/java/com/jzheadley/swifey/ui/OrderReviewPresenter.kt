@@ -1,5 +1,6 @@
 package com.jzheadley.swifey.ui
 
+import com.jzheadley.swifey.models.DiscountCheckDTO
 import com.jzheadley.swifey.models.Order
 import com.jzheadley.swifey.network.SwifeyApi
 import io.reactivex.Observer
@@ -29,6 +30,31 @@ class OrderReviewPresenter(val activity: OrderReviewActivity, val api: SwifeyApi
 
                     override fun onNext(t: Void) {
                         Timber.v("Submitting the order now")
+                    }
+
+                })
+    }
+
+    fun validateDiscountCode(discountCheckDTO: DiscountCheckDTO) {
+        api.validateDiscount(discountCheckDTO)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<Boolean> {
+                    override fun onSubscribe(d: Disposable) {
+                        Timber.v("subscribed to the response of validating the checkIn")
+                    }
+
+                    override fun onComplete() {
+                        Timber.v("finished validating checkIn")
+                        activity.finish()
+                    }
+
+                    override fun onNext(response: Boolean) {
+                        activity.handleValidateDiscountResponse(response);
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Timber.wtf(e, "Something went wrong in validating the checkIn")
                     }
 
                 })
