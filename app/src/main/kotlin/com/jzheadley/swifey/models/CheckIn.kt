@@ -9,7 +9,7 @@ import java.sql.Timestamp
 @Parcelize
 data class CheckIn(
         val checkInId: Int?,
-        var checkInDate: Timestamp,
+        var checkInDate: Timestamp?,
         var maxNumOrders: Int,
         var acceptingOrders: Boolean?,
         val checkedInUser: User?,

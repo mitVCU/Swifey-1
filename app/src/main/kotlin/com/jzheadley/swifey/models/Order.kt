@@ -9,7 +9,7 @@ import java.sql.Timestamp
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class Order(
-        val orderId: Int,
+        val orderId: Int?,
         var orderDate: Timestamp,
         var specialRequest: String,
         var checkIn: CheckIn?,

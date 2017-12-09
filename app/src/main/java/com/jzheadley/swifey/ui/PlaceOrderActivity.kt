@@ -51,6 +51,7 @@ class PlaceOrderActivity : AppCompatActivity() {
         Timber.v("The user has selected %s meals.", mealAdapter?.selectedMeals?.count())
         val intent = Intent(this, OrderReviewActivity::class.java)
         intent.putExtra("selectedMeals", mealAdapter?.selectedMeals)
+        intent.putExtra("checkIn", checkIn)
         startActivity(intent)
     }
 
